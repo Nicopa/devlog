@@ -37,7 +37,7 @@ yarn serve
 To build the Angular application and run the Electron application:
 
 ```bash
-yarn start
+yarn electron
 ```
 
 ## Usage
