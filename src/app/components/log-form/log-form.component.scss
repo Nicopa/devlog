@@ -1,0 +1,27 @@
+form {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  .description-field {
+    flex: 1 0 200px;
+    textarea {
+      height: 90px;
+    }
+  }
+  .last-field {
+    flex: 0 0 120px;
+  }
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+button {
+  width: 100%;
+}
+
+.mat-mdc-card-content:last-child {
+  padding-bottom: 4px;
+}

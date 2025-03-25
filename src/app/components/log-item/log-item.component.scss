@@ -1,0 +1,55 @@
+.log-item {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: monospace;
+  font-size: 16px;
+  color: var(--mat-sys-on-surface);
+  padding: 0 8px;
+  gap: 12px;
+  &.important {
+    border-left: 4px solid #f44336;
+  }
+  .header {
+    align-items: center;
+  }
+  .content {
+    flex: 1 0 auto;
+  }
+  .actions {
+    min-height: 1px;
+    padding: 2px;
+    visibility: hidden;
+    button {
+      padding: 0;
+      margin-left: 2px;
+      margin-right: 2px;
+    }
+    mat-icon {
+      width: 16px;
+      height: 16px;
+      font-size: 14px;
+    }
+  }
+  &:hover {
+    background-color: var(--mat-sys-surface);
+    .actions {
+      visibility: visible;
+    }
+  }
+}
+
+.description {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+:host ::ng-deep {
+  .dark-theme {
+    .category-badge {
+      background-color: #424242;
+    }
+  }
+} 

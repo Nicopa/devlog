@@ -1,0 +1,16 @@
+<div class="log-item" [class.important]="log.category === 'important'">
+  <div class="header">
+      {{getFormattedDate()}}
+  </div>
+  <div class="content">
+    <p class="description"><span *ngIf="log.category === 'important'">[IMPORTANT] </span>{{log.description}}</p>
+  </div>
+  <div class="actions">
+    <button mat-icon-button color="primary" (click)="edit.emit()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="delete.emit()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div> 

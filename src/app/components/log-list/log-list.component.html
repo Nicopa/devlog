@@ -1,0 +1,48 @@
+<mat-card class="log-list-card">
+  <div class="top-header">
+    <div class="filters">
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select [(value)]="selectedCategory" name="selectedCategory" (selectionChange)="onCategoryChange()">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search</mat-label>
+        <input matInput [(ngModel)]="searchText" name="searchText" (ngModelChange)="onSearchChange()" placeholder="Search in logs...">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="actions">
+      <button mat-raised-button color="primary" (click)="saveLogs()">
+        <mat-icon>save</mat-icon>
+        Save Logs
+      </button>
+      <button mat-raised-button color="accent" (click)="loadLogs()">
+        <mat-icon>folder_open</mat-icon>
+        Load Logs
+      </button>
+      <button mat-raised-button color="warn" (click)="clearLogs()">
+        <mat-icon>delete</mat-icon>
+        Clear Logs
+      </button>
+    </div>
+  </div>
+  <div class="bottom-header">
+    <div class="count">Showing {{filteredLogs.length}} logs out of {{logs.length}}</div>
+  </div>
+</mat-card> 
+<div *ngIf="filteredLogs.length > 0" class="log-grid">
+  <app-log-item
+    *ngFor="let log of filteredLogs; let i = index"
+    [log]="log"
+    (edit)="editLog(i)"
+    (delete)="deleteLog(i)">
+  </app-log-item>
+</div>
+<div *ngIf="filteredLogs.length === 0" class="no-logs-message">
+  No logs found
+</div>

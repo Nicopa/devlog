@@ -1,0 +1,61 @@
+.log-list-card {
+  margin-bottom: 20px;
+  padding: 16px;
+  .top-header {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+  }
+  .bottom-header {
+    .count {
+      text-align: left;
+      color: light-dark(#555, #888);
+    }
+  }
+  mat-card-content {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+    width: 100%;
+  }
+}
+
+.filters {
+  display: flex;
+  gap: 16px;
+  flex: 1 0 auto;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.search-field {
+  flex: 1;
+}
+
+.log-grid {
+  display: grid;
+  gap: 2px;
+}
+
+.no-logs-message {
+  text-align: center;
+  color: light-dark(#555, #888);
+  min-height: 100px;
+}
+
+@media (min-width: 960px) {
+  .log-list-card {
+    .bottom-header {
+      .count {
+        text-align: right;
+      }
+    }
+  }
+  .actions {
+    flex-direction: row;
+  }
+}

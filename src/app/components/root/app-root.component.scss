@@ -1,0 +1,28 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.container {
+  padding: 20px 20px 4px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: calc(calc(100vh - var(--mat-toolbar-standard-height, 64px)) - 26px);
+  app-log-list {
+    flex: 1 0 auto;
+  }
+}
+
+:host {
+  display: block;
+  height: 100vh;
+}
+
+:host ::ng-deep {
+  .dark-theme {
+    background-color: #303030;
+    color: #fff;
+  }
+} 
