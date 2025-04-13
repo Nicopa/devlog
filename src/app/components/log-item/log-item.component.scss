@@ -1,6 +1,7 @@
 .log-item {
   height: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 160px auto 76px;
   flex-direction: row;
   align-items: center;
   font-family: monospace;
