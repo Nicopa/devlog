@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
 
@@ -9,7 +9,8 @@ const createWindow = () => {
     width: 1200,
     height: 800,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   });
   mainWindow.loadURL(
@@ -19,12 +20,20 @@ const createWindow = () => {
       slashes: true
     })
   );
-  // Open the DevTools.
-  //mainWindow.webContents.openDevTools()
-
+  mainWindow.on('close', (event) => {
+    event.preventDefault();
+    console.log('Window close event triggered');
+    mainWindow.webContents.send('app-close');
+  });
+  ipcMain.on('confirm-close', () => {
+    console.log('Confirmed close event triggered');
+    mainWindow.destroy();
+  });
   mainWindow.on('closed', function () {
     mainWindow = null
-  })
+  });
+  // Open the DevTools.
+  // mainWindow.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {

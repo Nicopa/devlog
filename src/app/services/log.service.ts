@@ -12,9 +12,16 @@ export interface Log {
 })
 export class LogService {
   private logs = new BehaviorSubject<Log[]>([]);
+  private logsSaved = false;
   private autoSaveInterval: any;
 
-  constructor() {}
+  get isLogsSaved(): boolean {
+    return this.logsSaved;
+  }
+
+  get logsCount(): number {
+    return this.logs.value.length;
+  }
 
   getLogs(): Observable<Log[]> {
     return this.logs.asObservable();
@@ -23,12 +30,14 @@ export class LogService {
   addLog(log: Log): void {
     const currentLogs = this.logs.value;
     this.logs.next([...currentLogs, log]);
+    this.logsSaved = false;
   }
 
   updateLog(index: number, log: Log): void {
     const currentLogs = this.logs.value;
     currentLogs[index] = log;
     this.logs.next([...currentLogs]);
+    this.logsSaved = false;
   }
 
   deleteLog(index: number): void {
@@ -39,6 +48,7 @@ export class LogService {
 
   clearLogs() {
     this.logs.next([]);
+    this.logsSaved = false;
   }
 
   private getFormattedLogsForSaving() {
@@ -57,6 +67,7 @@ export class LogService {
     a.download = `${new Date().toISOString().split('T')[0]}_${new Date().toISOString().split('T')[1].split('.')[0]}_logs.txt`;
     a.click();
     URL.revokeObjectURL(url);
+    this.logsSaved = true;
   }
 
   loadLogs(text: string) {
@@ -65,6 +76,7 @@ export class LogService {
       return { timestamp, category, description: description.replace(/\\n/g, '\n').replace(/\\-/g, ' - ') };
     });
     this.logs.next(logs);
+    this.logsSaved = true;
   }
 
   ngOnDestroy(): void {
