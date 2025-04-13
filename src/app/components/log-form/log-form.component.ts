@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LogService } from '../../services/log.service';
 import { MatCardModule } from '@angular/material/card';
@@ -27,6 +27,14 @@ export class LogFormComponent {
     });
   }
 
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent): void {
+    // Check if Ctrl+Enter was pressed
+    if (event.ctrlKey && event.key === 'Enter') {
+      this.onSubmit();
+    }
+  }
+
   onSubmit(): void {
     if (this.logForm.valid) {
       this.logService.addLog({
@@ -36,4 +44,4 @@ export class LogFormComponent {
       this.logForm.reset({ category: 'log' });
     }
   }
-} 
+}
