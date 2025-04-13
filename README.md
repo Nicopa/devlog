@@ -40,6 +40,12 @@ To build the Angular application and run the Electron application:
 yarn electron
 ```
 
+## Create Distributable
+
+```bash
+yarn make
+```
+
 ## Usage
 
 1. Enter a log description and select a category (important/log)
